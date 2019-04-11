@@ -5,8 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>JavaScript Image Gallery</title>
+  <style>
+    .container {
+      max-width: 1000px;
+      position: relative;
+      margin: auto;
+    }
+    /* .slide {
+      display: none;
+    } */
+    .slide img {
+      max-width: 1000px;
+    }
+    #next, #prev {
+      position: absolute;
+      top: 50%;
+      cursor: pointer;
+      padding: 15px;
+      margin-top: -20px;
+      color: white;
+      font-size: 20px;
+      user-select: none;
+      border-radius: 0 4px 4px 0;
+      transition: 0.3s ease; 
+    }
+    #next {
+      right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+    #prev:hover, #next:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: rgb(0, 0 ,0)
+    }
+  </style>
 </head>
 <body>
+
+  <div class="container">
+    <div class="slide">
+      <img src="galleryImg/slide1.jpg" alt="">
+    </div>
+    <div class="slide">
+      <img src="galleryImg/slide2.jpg" alt="">
+    </div>
+    <div class="slide">
+      <img src="galleryImg/slide3.jpg" alt="">
+    </div>
+    <div class="slide">
+      <img src="galleryImg/slide4.jpg" alt="">
+    </div>
+    <a id="prev" onclick="slideImage(-1)">&#10094;</a>
+    <a id="next" onclick="slideImage(1)">&#10095;</a>
+  </div>
+
+  <script>
+    var slideIndex = 1;
+    showSlide();
+
+    function slideImage(n) {
+      showSlide(slideIndex += n);
+    }
+
+    function showSlide(n) {
+      var i;
+      var slides = document.getElementsByClassName("slide"); //Get all slides divs
+
+      //reset slideIndex if it exceeds divs length
+      if (n > slides.length) {slideIndex = 1;}
+      if (n < 1) {slideIndex = slides.length;}
+
+      //hide slides first
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+    }
+  </script>
   
 </body>
 </html>
